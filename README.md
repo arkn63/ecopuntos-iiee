@@ -11,4 +11,3 @@ Sirve esta carpeta con cualquier servidor HTTP local y abre `index.html`. Para u
 Las cuentas, contraseñas, saldos y movimientos se guardan en `localStorage` del navegador. No se sincronizan entre dispositivos ni navegadores, y cualquiera con acceso al navegador o al código de la página puede ver las credenciales. Por ello, este prototipo solo debe usarse con datos de prueba. Para operar con alumnos reales se necesita un servidor con autenticación, base de datos y controles de acceso.
 
 La cuenta inicial usa un nombre genérico para no publicar datos personales de un estudiante.
-Los botones de la pantalla de acceso completan las credenciales de demostración.

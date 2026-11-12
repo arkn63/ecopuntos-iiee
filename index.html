@@ -93,12 +93,6 @@
     .btn-outline { background: white; color: var(--green-900); border-color: #cddfcd; }
     .btn-outline:hover { background: #f5faf4; }
     .btn-full { width: 100%; min-height: 53px; }
-    .demo-box { margin-top: 27px; padding: 18px; border: 1px dashed #c9dac9; border-radius: 15px; background: #f7faf4; }
-    .demo-box p { margin: 0 0 12px; color: var(--muted); font-size: 13px; line-height: 1.5; }
-    .demo-box strong { color: var(--ink); }
-    .demo-actions { display: flex; gap: 9px; flex-wrap: wrap; }
-    .demo-actions button { border: 1px solid #d3e2d2; background: white; padding: 8px 12px; border-radius: 9px; color: var(--green-900); font-size: 12px; font-weight: 750; }
-    .demo-actions button:hover { background: var(--green-100); }
 
     /* PANELES: estilos compartidos por estudiante y administrador.
        La clase .hero es la tarjeta verde principal; .panel es una tarjeta blanca. */
@@ -315,10 +309,10 @@
       // Es un prototipo local: estas credenciales sirven para probar los dos roles.
       // En una aplicación real, las contraseñas se comprobarían en un servidor.
       const STORAGE_KEY = "ecopuntos_iiee_demo_v1";
-      const SESSION_KEY = "ecopuntos_iiee_session_v1";
+      const SESSION_KEY = "ecopuntos_iiee_session_v2";
       const STUDENT_ID = "julio";
       const STUDENT_NAME = "Estudiante de prueba";
-      const demoAdmin = { username: "admin-demo", password: "demo2026" };
+      const adminAccount = { username: "CRcrea", password: "Cr2026" };
 
       // Cada material tiene una tarifa: rate indica cuántos puntos vale 1 kg.
       // Por ejemplo, 2 kg de cartón (rate = 8) producen 16 EcoPuntos.
@@ -467,32 +461,17 @@
                   <p id="login-error" class="form-error" role="alert" aria-live="polite"></p>
                   <button class="btn btn-primary btn-full" type="submit">Iniciar sesión ${icon("arrow")}</button>
                 </form>
-                <div class="demo-box">
-                  <p><strong>Demostración pública</strong><br>Usa solo cuentas de prueba. Los datos se guardan en este navegador y no se comparten con otros dispositivos.</p>
-                  <div class="demo-actions">
-                    <button type="button" data-demo="student">Usar cuenta de estudiante</button>
-                    <button type="button" data-demo="admin">Usar cuenta de administrador</button>
-                  </div>
-                </div>
               </div>
             </section>
           </main>`;
-        // addEventListener conecta cada botón con la acción que debe ejecutar.
-        // Los botones de prueba rellenan usuario y contraseña automáticamente.
-        app.querySelectorAll("[data-demo]").forEach(button => button.addEventListener("click", () => {
-          const account = button.dataset.demo === "admin" ? demoAdmin : state.students.find(s => s.id === STUDENT_ID);
-          app.querySelector("#username").value = account?.username || "";
-          app.querySelector("#password").value = account?.password || "";
-          app.querySelector("#login-error").textContent = "";
-          app.querySelector("#login-form button[type=submit]").focus();
-        }));
+        // El formulario comprueba las credenciales al enviarse.
         app.querySelector("#login-form").addEventListener("submit", event => {
           // Evitamos que el formulario recargue la página antes de validar datos.
           event.preventDefault();
           const username = app.querySelector("#username").value.trim();
           const password = app.querySelector("#password").value;
           const account = state.students.find(s => s.username === username && s.password === password);
-          const isAdmin = username === demoAdmin.username && password === demoAdmin.password;
+          const isAdmin = username === adminAccount.username && password === adminAccount.password;
           if (!isAdmin && !account) {
             app.querySelector("#login-error").textContent = "Usuario o contraseña incorrectos.";
             return;
@@ -702,7 +681,7 @@
           error.textContent = "Completa el nombre y usuario (mínimo 3 caracteres) y una contraseña de 6 o más caracteres.";
           return;
         }
-        if (username.toLocaleLowerCase("es-PE") === demoAdmin.username.toLocaleLowerCase("es-PE") || state.students.some(s => (s.username || "").toLocaleLowerCase("es-PE") === username.toLocaleLowerCase("es-PE"))) {
+        if (username.toLocaleLowerCase("es-PE") === adminAccount.username.toLocaleLowerCase("es-PE") || state.students.some(s => (s.username || "").toLocaleLowerCase("es-PE") === username.toLocaleLowerCase("es-PE"))) {
           error.textContent = "Ese usuario ya existe. Elige uno diferente.";
           return;
         }
