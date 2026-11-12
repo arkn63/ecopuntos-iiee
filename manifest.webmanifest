@@ -1,0 +1,15 @@
+{
+  "name": "EcoPuntos IIEE",
+  "short_name": "EcoPuntos",
+  "description": "Recicla, suma puntos y canjea recompensas escolares.",
+  "lang": "es-PE",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f5f7f2",
+  "theme_color": "#134b35",
+  "icons": [
+    { "src": "./icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any maskable" },
+    { "src": "./icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+  ]
+}
